@@ -11,8 +11,15 @@
 </head>
 <body>
     <h1>pull up</h1>
-    <!-- content doesn't show if no value given-->
+    <!-- content doesn't show if no value given in python-->
     <p>{{content}}</p>
     <p>hi</p>
+    <!--can write python code-->
+    {% for x in range(0,10) %}
+        {% if x % 2 == 1 %}
+            <p>HIIIIIIII LOOPED</p>
+            <p>{{x}}</p>
+        {% endif %}
+    {% endfor %}
 </body>
 </html>
