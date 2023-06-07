@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for
+from flask import Flask, redirect, url_for, render_template
 
 # if app.route has / before and after, url can be with / or not
 
@@ -10,7 +10,7 @@ app = Flask(__name__)
 #prob should be /home but whatever
 @app.route("/") 
 def home():
-    return "Hello, it's home <h3>hi<h3>"
+    return "Hello, it's home <h3>hi</h3>"
 
 
 #another page. This one will give us <name> as the param
