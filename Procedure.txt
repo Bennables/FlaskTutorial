@@ -1,0 +1,3 @@
+start it by doing "source venv/bin/activate
+
+end by deactivate
