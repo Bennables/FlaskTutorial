@@ -12,12 +12,12 @@ def login():
     if request.method == "POST":
         user = request.form["nm"]
         session["user"] = user
-        return redirect(url_for("name"))
+        return redirect(url_for("user"))
     else:
         return render_template("login.html")
     
-@app.route("/name")
-def name():
+@app.route("/user/")
+def user():
     if "user" in session:
         user = session["user"]
         return f"<h1>{user}</h1>"
