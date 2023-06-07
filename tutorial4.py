@@ -1,4 +1,4 @@
-from flask import Flask, url_for, redirect, render_template
+from flask import Flask, url_for, redirect, render_template,request
 #posting and getting  
 app = Flask(__name__)
 
@@ -8,7 +8,13 @@ def home():
 
 @app.route("/login/", methods=["POST", "GET"])
 def login():
-    return render_template("login.html")
+
+    if request.method == "POST":
+        # this takes the item's name
+        user = request.form["nm"]
+        return redirect(url_for("user", usr = user))
+    else:
+        return render_template("login.html")
 
 @app.route("/<usr>/")
 def user(usr):
