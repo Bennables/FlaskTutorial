@@ -1,7 +1,10 @@
 from flask import Flask, render_template, redirect, request, url_for, session
 #sessions. All session data is encrypted
+from datetime import timedelta
+
 app = Flask(__name__)
 app.secret_key = "Hello, I'm ben"
+app.permanent_session_lifetime = timedelta(minutes = 5) #can be minutes, secs
 
 @app.route("/")
 def home():
@@ -10,6 +13,7 @@ def home():
 @app.route("/login/", methods = ["POST", "GET"])
 def login():
     if request.method == "POST":
+        session.permanent = True   #this line makes the session permanent
         user = request.form["nm"]
         session["user"] = user
         return redirect(url_for("user"))
