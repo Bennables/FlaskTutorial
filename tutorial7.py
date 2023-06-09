@@ -6,9 +6,21 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.secret_key = "Hello, I'm ben"
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.sqlite3'
+app.config ["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 app.permanent_session_lifetime = timedelta(minutes = 5) #can be minutes, secs
 
 db = SQLAlchemy(app)
+
+class users(db.Model):
+    #every object has unique id, v gives each one a new one in the db.  
+    _id = db.Column("id", db.Integer, primary_key = True)
+    name = db.Column("name", db.String(100))
+    email = db.Column("email", db.String(100))
+
+    def __init__(self, name, email):
+        self.name = name
+        self.email = email
 
 @app.route("/")
 def home():
@@ -56,4 +68,7 @@ def logout():
     return redirect(url_for("login"))
     
 if __name__ == "__main__":
+    with app.app_context():
+        db.create_all()
+        
     app.run(debug = True)
